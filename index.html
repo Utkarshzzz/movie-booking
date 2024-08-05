@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style.css">
+  
+
+<script>
+   angular.module('surveyApp', [])
+
+.controller('surveyController', function($scope) {
+  $scope.formData = {};
+  $scope.submitForm = function() {
+    if (!$scope.formData.name || !$scope.formData.email || !$scope.formData.query) {
+      alert("Please fill in all the required fields.");
+    } else {
+      
+      $.ajax({
+        type: "POST",
+        url: "your-server-url",
+        data: $scope.formData,
+        success: function(response) {
+          alert("Form submitted successfully.");
+          
+          $scope.formData = {};
+          $scope.$apply();
+        },
+        error: function() {
+          alert("Failed to submit form. Please try again.");
+        }
+      });
+    }
+  };
+});
+
+// JSON data
+var chartData = {
+  labels: ["Workshop", "Theater", "Concert", "Sport"],
+  data: [40, 15, 25, 20]
+};
+
+// Chart.js code
+var chart = document.getElementById("doughnut");
+var eventList = document.querySelector(".chart ul");
+
+new Chart(chart, {
+  type: "doughnut",
+  data: {
+    labels: chartData.labels,
+    datasets: [{
+      label: "# of Events",
+      data: chartData.data,
+      backgroundColor: ["#582bac", "#b31a4d", "#e48e2c", "#4a920f"],
+      offset: 10,
+      hoverOffset: 8,
+      hoverBorderColor: "#9a999b",
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          color: "#8b8a96",
+          font: {
+            size: 12,
+            weight: 600
+          }
+        }
+      }
+    },
+    layout: {
+      padding: {
+        bottom: 10
+      }
+    }
+  }
+});
+
+function population() {
+  chartData.labels.forEach(function(label, i) {
+    var eachEvent = document.createElement("li");
+    eachEvent.innerHTML = label + ": <span class='percentage'>" + chartData.data[i] + "%</span> ";
+    eventList.appendChild(eachEvent);
+  });
+}
+
+population();
+
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script defer   src="main.js"></script>
+    <title>Document</title>
+</head>
+
+    <body>
+        <nav class="main-menu">
+          <div>
+            <div class="user-info">
+              <img
+                src="https://i.pinimg.com/736x/bc/5b/3d/bc5b3d27c8cd56cf85205b40b0a987ae.jpg"
+                alt="user" />
+              <p>Lakshita Setia</p>
+            </div>
+            <ul>
+              <li class="nav-item active">
+                <a href="#">
+                  <i class="fa fa-user nav-icon"></i>
+                  <span class="nav-text">Profile</span>
+                </a>
+              </li>
+    
+              <li class="nav-item">
+                <a href="#">
+                  <i class="fa fa-map nav-icon"></i>
+                  <span class="nav-text">Discover</span>
+                </a>
+              </li>
+    
+              <li class="nav-item">
+                <a href="#">
+                  <i class="fa fa-arrow-trend-up nav-icon"></i>
+                  <span class="nav-text">Trending</span>
+                </a>
+              </li>
+    
+              <li class="nav-item">
+                <a href="#">
+                  <i class="fa-solid fa-chart-simple nav-icon"></i>
+                  <span class="nav-text">Analytics</span>
+                </a>
+              </li>
+    
+              <li class="nav-item">
+                <a href="#">
+                  <i class="fa fa-heart nav-icon"></i>
+                  <span class="nav-text">Favorites</span>
+                </a>
+              </li>
+    
+              <li class="nav-item">
+                <a href="#">
+                  <i class="fa-solid fa-pen-to-square nav-icon"></i>
+                  <span class="nav-text">Reviews</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+    
+          <ul>
+            <li class="nav-item">
+              <a href="#">
+                <i class="fa fa-gear nav-icon"></i>
+                <span class="nav-text">Settings</span>
+              </a>
+            </li>
+    
+            <li class="nav-item">
+              <a href="#">
+                <i class="fa fa-right-from-bracket nav-icon"></i>
+                <span class="nav-text">Logout</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+    
+        <section class="content">
+          <div class="left-content">
+            <div class="search-and-check">
+              <form class="search-box">
+                <input type="text" placeholder="Search event..." />
+                <i class="bx bx-search"></i>
+              </form>
+              <div class="interaction-control-mobile interactions">
+                <i class="fa-regular fa-envelope notified"></i>
+                <i class="fa-regular fa-bell notified"></i>
+                <div class="toggle" onclick="switchTheme()">
+                  <div class="mode-icon moon">
+                    <i class="bx bxs-moon"></i>
+                  </div>
+                  <div class="mode-icon sun hidden">
+                    <i class="bx bxs-sun"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+    
+            <div class="header">
+              <picture class="morning-img">
+                <img
+                  class="header-mobile"
+                  src="https://i.pinimg.com/originals/47/10/1f/47101ff8543b3be2039004b5c4fe44b6.gif"
+                  alt="" />
+                <img
+                  class="header-tablet"
+                  src="https://i.pinimg.com/originals/47/10/1f/47101ff8543b3be2039004b5c4fe44b6.gif"
+                  alt="" />
+                <img
+                  class="header-desktop"
+                  src="https://i.pinimg.com/originals/47/10/1f/47101ff8543b3be2039004b5c4fe44b6.gif"
+                  alt="" />
+              </picture>
+    
+              <picture class="night-img hidden">
+                <img
+                  class="header-mobile"
+                  src="https://i.pinimg.com/originals/47/10/1f/47101ff8543b3be2039004b5c4fe44b6.gif"
+                  alt="" />
+                <img
+                  class="header-tablet"
+                  src="https://i.pinimg.com/originals/47/10/1f/47101ff8543b3be2039004b5c4fe44b6.gif"
+                  alt="" />
+                <img
+                  class="header-desktop"
+                  src="https://i.pinimg.com/originals/47/10/1f/47101ff8543b3be2039004b5c4fe44b6.gif"
+                  alt="" />
+              </picture>
+            </div>
+    
+            <div class="upcoming-events">
+              <h1>Upcoming Events</h1>
+              <div class="event-container">
+                <div class="card event-card">
+                  <div class="event-header">
+                    <img
+                      src="https://i.ytimg.com/vi/oiLfnHfam4s/maxresdefault.jpg"
+                      alt="" />
+                    <p>March 19, 8:00 PM</p>
+                    <i class="bx bx-heart like-btn"></i>
+                  </div>
+                  <div class="event-content">
+                    <h2>Sunburn Bangalore</h2>
+                    <p>Bengaluru, Karnataka</p>
+                  </div>
+                  <div class="event-footer">
+                    <p style="background-color: #e48e2c">Concert</p>
+                    <div class="btn-group">
+                      <button>Buy Ticket</button>
+                      <div class="share">
+                        <button class="share-btn">
+                          <i class="fa-solid fa-share"></i>
+                        </button>
+                        <ul class="popup">
+                          <li>
+                            <a href="#" style="color: rgb(79, 153, 213)"
+                              ><i class="bx bxl-twitter"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a href="#" style="color: rgb(34, 173, 34)"
+                              ><i class="bx bxl-whatsapp"></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="card event-card">
+                  <div class="event-header">
+                    <img
+                      src="data:image/jpeg;base64,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"
+                      alt="" />
+                    <p>March 22, 8:00 PM</p>
+                    <i class="bx bxs-heart like-btn"></i>
+                  </div>
+                  <div class="event-content">
+                    <h2>Mahindra Blues</h2>
+                    <p>Bhopal, Madhya Pradesh</p>
+                  </div>
+                  <div class="event-footer">
+                    <p style="background-color: #582bac">Workshop</p>
+                    <div class="btn-group">
+                      <button>Buy Ticket</button>
+                      <div class="share">
+                        <button class="share-btn">
+                          <i class="fa-solid fa-share"></i>
+                        </button>
+                        <ul class="popup">
+                          <li>
+                            <a href="#" style="color: rgb(79, 153, 213)"
+                              ><i class="bx bxl-twitter"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a href="#" style="color: rgb(34, 173, 34)"
+                              ><i class="bx bxl-whatsapp"></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="card event-card">
+                  <div class="event-header">
+                    <img
+                      src="https://res.cloudinary.com/dwzmsvp7f/image/fetch/q_75,f_auto,w_1316/https%3A%2F%2Fmedia.insider.in%2Fimage%2Fupload%2Fc_crop%2Cg_custom%2Fv1669717101%2Fecw84r7dzjuqpw9fuq7w.jpg"
+                      alt="" />
+                    <p>March 26, 10:00 PM</p>
+                    <i class="bx bx-heart like-btn"></i>
+                  </div>
+                  <div class="event-content">
+                    <h2>Kasol Music Festival</h2>
+                    <p>Kasol, Himachal Pradesh</p>
+                  </div>
+                  <div class="event-footer">
+                    <p style="background-color: #e48e2c">Concert</p>
+                    <div class="btn-group">
+                      <button>Buy Ticket</button>
+                      <div class="share">
+                        <button class="share-btn">
+                          <i class="fa-solid fa-share"></i>
+                        </button>
+                        <ul class="popup">
+                          <li>
+                            <a href="#" style="color: rgb(79, 153, 213)"
+                              ><i class="bx bxl-twitter"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a href="#" style="color: rgb(34, 173, 34)"
+                              ><i class="bx bxl-whatsapp"></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="card event-card">
+                  <div class="event-header">
+                    <img
+                      src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/3990b1bd-f34d-4fda-bfc9-d807d9e2f0f6"
+                      alt="" />
+                    <p>March 28, 3:00 PM</p>
+                    <i class="bx bx-heart like-btn"></i>
+                  </div>
+                  <div class="event-content">
+                    <h2>Terracota Clay</h2>
+                    <p>Odisha</p>
+                  </div>
+                  <div class="event-footer">
+                    <p style="background-color: #582bac">Workshop</p>
+                    <div class="btn-group">
+                      <button>Buy Ticket</button>
+                      <div class="share">
+                        <button class="share-btn">
+                          <i class="fa-solid fa-share"></i>
+                        </button>
+                        <ul class="popup">
+                          <li>
+                            <a href="#" style="color: rgb(79, 153, 213)"
+                              ><i class="bx bxl-twitter"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a href="#" style="color: rgb(34, 173, 34)"
+                              ><i class="bx bxl-whatsapp"></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="card event-card">
+                  <div class="event-header">
+                    <img
+                      src="https://images.news9live.com/wp-content/uploads/2024/02/Bharat-Rang-Mahotsav-2024.jpg"
+                      alt="" />
+                    <p>April 4, 8:30 PM</p>
+                    <i class="bx bx-heart like-btn"></i>
+                  </div>
+                  <div class="event-content">
+                    <h2>Bharat Rang Mahotsav</h2>
+                    <p>Ahmedabad, Gujarat</p>
+                  </div>
+                  <div class="event-footer">
+                    <p style="background-color: #b31a4d">Theatre</p>
+                    <div class="btn-group">
+                      <button>Buy Ticket</button>
+                      <div class="share">
+                        <button class="share-btn">
+                          <i class="fa-solid fa-share"></i>
+                        </button>
+                        <ul class="popup">
+                          <li>
+                            <a href="#" style="color: rgb(79, 153, 213)"
+                              ><i class="bx bxl-twitter"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a href="#" style="color: rgb(34, 173, 34)"
+                              ><i class="bx bxl-whatsapp"></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="card event-card">
+                  <div class="event-header">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfTr5VUpL_91kvIEVsJYjjsMiXooRXgoXNUOrBEyxXNg&s"
+                      alt="" />
+                    <p>April 5, 6:45 PM</p>
+                    <i class="bx bx-heart like-btn"></i>
+                  </div>
+                  <div class="event-content">
+                    <h2>India Art Fest</h2>
+                    <p>Mumbai, Maharashtra</p>
+                  </div>
+                  <div class="event-footer">
+                    <p style="background-color: #582bac">Workshop</p>
+                    <div class="btn-group">
+                      <button>Buy Ticket</button>
+                      <div class="share">
+                        <button class="share-btn">
+                          <i class="fa-solid fa-share"></i>
+                        </button>
+                        <ul class="popup">
+                          <li>
+                            <a href="#" style="color: rgb(79, 153, 213)"
+                              ><i class="bx bxl-twitter"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a href="#" style="color: rgb(34, 173, 34)"
+                              ><i class="bx bxl-whatsapp"></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="card event-card">
+                  <div class="event-header">
+                    <img
+                      src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/566017c5-9b68-4b35-a14f-5d04d43fa408"
+                      alt="" />
+                    <p>April 6, 9:00 PM</p>
+                    <i class="bx bxs-heart like-btn"></i>
+                  </div>
+                  <div class="event-content">
+                    <h2>Harry Potter Film Concert Series</h2>
+                    <p>Pune, Maharshtra</p>
+                  </div>
+                  <div class="event-footer">
+                    <p style="background-color: #e48e2c">Concert</p>
+                    <div class="btn-group">
+                      <button>Buy Ticket</button>
+                      <div class="share">
+                        <button class="share-btn">
+                          <i class="fa-solid fa-share"></i>
+                        </button>
+                        <ul class="popup">
+                          <li>
+                            <a href="#" style="color: rgb(79, 153, 213)"
+                              ><i class="bx bxl-twitter"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a href="#" style="color: rgb(34, 173, 34)"
+                              ><i class="bx bxl-whatsapp"></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="card event-card">
+                  <div class="event-header">
+                    <img
+                      src="https://akm-img-a-in.tosshub.com/businesstoday/images/story/202311/untitled_-_2023-11-17t160526-sixteen_nine.jpg?size=948:533"
+                      alt="" />
+                    <p>Jun 23, 1:30 PM</p>
+                    <i class="bx bx-heart like-btn"></i>
+                  </div>
+                  <div class="event-content">
+                    <h2>India vs Australia</h2>
+                    <p>Ranchi, Jharkhand</p>
+                  </div>
+                  <div class="event-footer">
+                    <p style="background-color: #4a920f">Sport</p>
+                    <div class="btn-group">
+                      <button>Buy Ticket</button>
+                      <div class="share">
+                        <button class="share-btn">
+                          <i class="fa-solid fa-share"></i>
+                        </button>
+                        <ul class="popup">
+                          <li>
+                            <a href="#" style="color: rgb(79, 153, 213)"
+                              ><i class="bx bxl-twitter"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a href="#" style="color: rgb(34, 173, 34)"
+                              ><i class="bx bxl-whatsapp"></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <div class="reviews">
+              <h1>Past Event Reviews</h1>
+              <div class="review-container">
+                <div class="card review-card">
+                  <h2>Sunburn Pune</h2>
+                  <div class="ratings">
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bx-star"></i>
+                    <i class="bx bx-star"></i>
+                  </div>
+                  <p>
+                    Enjoyed Sunburn concert! It was sunny though but still the artists were great.
+                  </p>
+                </div>
+    
+                <div class="card review-card">
+                  <h2>Electro Groove Night</h2>
+                  <div class="ratings">
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star-half"></i>
+                  </div>
+                  <p>
+                    The Electro Groove Night was so much fun! The music was awesome,
+                    and everyone had a great time dancing – a fantastic night out
+                    for sure!
+                  </p>
+                </div>
+    
+                <div class="card review-card">
+                  <h2>Wimbledon Championships - 2024 (Final)</h2>
+                  <div class="ratings">
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                  </div>
+                  <p>
+              
+                    Watching the Wimbledon final between Novak Djokovic and Carlos
+                    Alcaraz was so exciting! The intense match and incredible skills
+                    of the players made it a thrilling experience that I'll always
+                    remember.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+    
+          <div class="right-content">
+            <div class="interaction-control interactions">
+              <i class="fa-regular fa-envelope notified"></i>
+              <i class="fa-regular fa-bell notified"></i>
+              <div class="toggle" onclick="switchTheme()">
+                <div class="mode-icon moon">
+                  <i class="bx bxs-moon"></i>
+                </div>
+                <div class="mode-icon sun hidden">
+                  <i class="bx bxs-sun"></i>
+                </div>
+              </div>
+            </div>
+    
+            <div class="analytics">
+              <h1>Analytics</h1>
+              <div class="analytics-container">
+                <div class="total-events">
+                  <div class="event-number card">
+                    <h2>Past Events</h2>
+                    <p>20</p>
+                    <i class="bx bx-check-circle"></i>
+                  </div>
+                  <div class="event-number card">
+                    <h2>Upcoming Events</h2>
+                    <p>3</p>
+                    <i class="bx bx-timer"></i>
+                  </div>
+                </div>
+    
+                <div class="chart" id="doughnut-chart">
+                  <h2>Attended Events</h2>
+                  <canvas id="doughnut"></canvas>
+                  <ul></ul>
+                </div>
+              </div>
+            </div>
+    
+            <div class="contacts">
+              <h1>Contacts</h1>
+              <div class="contacts-container">
+                <div class="contact-status">
+                  <div class="contact-activity">
+                    <img
+                      src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/e56800db-687d-4d0e-a470-51e37a4431c7"
+                      alt="" />
+                    <p>Prateek favored <span>Kasol Music Festival</span></p>
+                  </div>
+                  <small>1 hour ago</small>
+                </div>
+    
+                <div class="contact-status">
+                  <div class="contact-activity">
+                    <img
+                      src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/fac9f27b-c1ea-4bba-973f-88996322fa2d"
+                      alt="" />
+                    <p>
+                      Justus bought a ticket for
+                      <span>Mahindra Blues</span>
+                    </p>
+                  </div>
+                  <small>4 hours ago</small>
+                </div>
+    
+                <div class="contact-status">
+                  <div class="contact-activity">
+                    <img
+                      src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/1499d73c-ccc0-41a1-b530-1d629012aebd"
+                      alt="" />
+                    <p>
+                      Daksh bought a ticket for
+                      <span>India vs Australia</span>
+                    </p>
+                  </div>
+                  <small>1 day ago</small>
+                </div>
+    
+                <div class="contact-status">
+                  <div class="contact-activity">
+                    <img
+                      src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/949768d4-0196-486c-b386-edb47ddd54c2"
+                      alt="" />
+                    <p>
+                      Susanna favored
+                      <span>Terracota</span>
+                    </p>
+                  </div>
+                  <small>1 day ago</small>
+                </div>
+    
+                <div class="contact-status">
+                  <div class="contact-activity">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf3VUkvxVwV7KR1-fjjp0u0El8hrUVNf43K8HU8wtikQ&s"
+                      alt="" />
+                    <p>
+                      Utkarsh bought a ticket for
+                      <span>Sunburn Bangalore</span>
+                    </p>
+                  </div>
+                  <small>3 days ago</small>
+                </div>
+    
+                <div class="contact-status">
+                  <div class="contact-activity">
+                    <img
+                      src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/7740acc0-3f86-4c28-8a8c-5ae67c343edb"
+                      alt="" />
+                    <p>
+                      Dhruv favored
+                      <span>Harry Potter Film Concert Series</span>
+                    </p>
+                  </div>
+                  <small>6 days ago</small>
+                  <section class="activity-feed">
+                    <div class="contact-status">
+                      <div class="contact-activity">
+                        <img
+                          src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/fac9f27b-c1ea-4bba-973f-88996322fa2d"
+                          alt=""
+                        />
+                        <p>Prateek favored <span>Kasol Music Festival</span></p>
+                      </div>
+                      <small>1 hour ago</small>
+                    </div>
+                
+                   
+                
+                    <section class="activity-feed">
+                      <div class="contact-status">
+                        <div class="contact-activity">
+                          <img
+                            src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/fac9f27b-c1ea-4bba-973f-88996322fa2d"
+                            alt=""
+                          />
+                          <p>Prateek favored <span>Kasol Music Festival</span></p>
+                        </div>
+                        <small>1 hour ago</small>
+                      </div>
+                  
+                      
+                  
+                      <div class="contact-status">
+                        <button class="contact-activity">
+                            <a href="authenticate.html">Click here to submit your query</a>
+                          </button>
+                  
+                
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </body>
+</html>
